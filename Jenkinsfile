@@ -14,7 +14,7 @@ node  {
             sh 'mvn compile'
         }
     }
-     stage('Test') {
+     stage('Testing') {
         withMaven(jdk: 'jdk8.0', maven:'m2') {
             sh 'mvn test'
 
