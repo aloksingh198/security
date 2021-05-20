@@ -10,25 +10,25 @@ node  {
         checkout scm;
     }
     stage('Compile') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk8.0', maven:'m2') {
             sh 'mvn compile'
         }
     }
      stage('Test') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk8.0', maven:'m2') {
             sh 'mvn test'
 
         }
     }
 
      stage('Package') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk8.0', maven:'m2') {
             sh 'mvn package'
         }
     }
 
     stage('Upload To Artifactory') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk8.0', maven:'m2') {
             sh 'mvn install'
         }
     }
