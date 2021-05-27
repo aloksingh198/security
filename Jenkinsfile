@@ -10,19 +10,19 @@ node  {
         checkout scm;
     }
     stage('Compile') {
-        withMaven(jdk: 'jdk8.0', maven:'m2') {
+        withMaven(jdk: 'jdk11', maven:'m2') {
             sh 'mvn compile'
         }
     }
      stage('Test') {
-        withMaven(jdk: 'jdk8.0', maven:'m2') {
+        withMaven(jdk: 'jdk11', maven:'m2') {
             sh 'mvn test'
 
         }
     }
 
      stage('Package') {
-        withMaven(jdk: 'jdk8.0', maven:'m2') {
+        withMaven(jdk: 'jdk11', maven:'m2') {
             sh 'mvn package'
         }
     }
