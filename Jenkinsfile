@@ -28,7 +28,7 @@ node  {
     }
 
     stage('Upload To Artifactory') {
-        withMaven(jdk: 'jdk8.0', maven:'m2') {
+        withMaven(jdk: 'jdk11', maven:'m2') {
             sh 'mvn install'
         }
     }
