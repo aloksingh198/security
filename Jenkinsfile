@@ -27,12 +27,12 @@ node  {
         }
     }
 
-    stage('Upload To Artifactory') {
+    stage('Building Docker Image') {
         withMaven(jdk: 'jdk11', maven:'m2') {
             sh 'mvn install'
         }
     }
-    stage('Who Completed') {
+    stage('Publishing Docker Image') {
         sh "echo ${Author}"
     }
 
