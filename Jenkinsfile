@@ -28,9 +28,9 @@ node  {
     }
 
     stage('Building Docker Image') {
-        withMaven(jdk: 'jdk11', maven:'m2') {
-            sh 'mvn install'
-        }
+        
+            sh 'docker build -t alok1980/testimage:1.0.1 .'
+        
     }
     stage('Publishing Docker Image') {
         sh "echo ${Author}"
