@@ -31,7 +31,7 @@ pipeline{
         }
         stage ('Build Docker Image '){
             steps{
-                sh 'docker build -t alok1980/testimage'
+                sh 'docker build -t alok1980/testimage .'
             }   
         }
         stage ('Docker Image Push'){
