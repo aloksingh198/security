@@ -1,6 +1,6 @@
 node  {
-    def app
-    
+    def Author = 'Alok Singh'
+
     stage('Clean WS') {
         sh 'echo "Cleaning WorkSpace"'
         cleanWs();
@@ -27,13 +27,13 @@ node  {
         }
     }
 
-    stage('Building image') {
-        
-            app = docker build -t ('alok1980/testimage')
-        
+    stage('Building Docker Image') {
+        withMaven(jdk: 'jdk11', maven:'m2') {
+            sh 'mvn install'
+        }
     }
-    stage('Test image') {
-        sh "echo Test Passed"
+    stage('Publishing Docker Image') {
+        sh "echo ${Author}"
     }
 
 }
