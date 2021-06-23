@@ -1,7 +1,6 @@
-FROM jenkins/jenkins:lts
-LABEL author="Alok Singh"
-LABEL email="aloksingh.to@gmail.com"
-RUN apt-get update -y && \
-    apt-get install -y apache2
-EXPOSE 80
+FROM java:11
+WORKDIR /
+ADD ./target/spring-security-good-0.0.1-SNAPSHOT.jar spring-security-good-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+CMD java -jar spring-security-good-0.0.1-SNAPSHOT.jar
 
