@@ -1,6 +1,5 @@
-FROM java:11
-WORKDIR /
-ADD ./target/spring-security-good-0.0.1-SNAPSHOT.jar spring-security-good-0.0.1-SNAPSHOT.jar
-EXPOSE 8080
-CMD java -jar spring-security-good-0.0.1-SNAPSHOT.jar
+FROM ubuntu:18.04
+RUN apt-get update -y && \
+    apt-get install -y apache2
+EXPOSE 80
 
