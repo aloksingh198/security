@@ -42,17 +42,7 @@ pipeline{
                 sh 'docker push alok1980/myapp:1.0.0'
             }   
         }
-        stage('Deploy Container on dev_server') {
-            environment { 
-                dockerRUN = 'sh /home/ubuntu/dockerRUN.sh'
-                }
-            steps {
-                sshagent(['dev_server']) {
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@3.142.249.149 ${dockerRUN}"
-
-                }
-            }
-        }
+        
     }
 }
 
