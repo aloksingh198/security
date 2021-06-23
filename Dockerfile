@@ -1,4 +1,4 @@
-FROM linux:jenkins
+FROM jenkins/jenkins:lts
 LABEL author="Alok Singh"
 LABEL email="aloksingh.to@gmail.com"
 RUN apt-get update -y && \
