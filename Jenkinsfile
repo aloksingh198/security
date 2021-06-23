@@ -29,7 +29,7 @@ node  {
 
     stage('Build Image') {
         
-            app = 'docker build -t ("alok1980/testimage")
+            app = docker build -t ('alok1980/testimage')
         
     }
     stage('Test image') {
