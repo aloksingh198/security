@@ -31,7 +31,7 @@ pipeline{
         }
         stage ('Build Docker Image '){
             steps{
-                sh 'docker build -t alok1980/myapp:1.0.0 .'
+                sh 'docker build -t alok1980/testimage'
             }   
         }
         stage ('Docker Image Push'){
@@ -39,7 +39,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'docker_hub_pass', variable: 'docker_hub_pass')]) {
                     sh "docker login -u alok1980 -p ${docker_hub_pass}"
                 }
-                sh 'docker push alok1980/myapp:1.0.0'
+                sh 'docker push alok1980/testimage'
             }   
         }
         
