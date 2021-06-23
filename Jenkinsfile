@@ -28,19 +28,19 @@ node  {
     }
 
     stage('Building Docker Image') {
-        steps{
+        steps {
             sh 'docker image build -t aloksingh1980/myapp:1.0.0.'
         }
     }
-    stahe('Docker Image Push'){
-        steps{
+    stage('Docker Image Push'){
+        steps {
             withCredentials([string(credentialsId: 'docker_hub_pass', variable: 'docker_hub_pass')]) {
                     sh "docker login -u alok1980 -p ${docker_hub_pass}"
             }
             sh 'docker push aloksingh1980/myapp:1.0.0'
         }
     }
-            stage('Deploy Container on dev_server') {
+     stage('Deploy Container on dev_server') {
             environment { 
                 dockerRUN = 'sh /home/ubuntu/dockerRUN.sh'
                 }
