@@ -1,55 +1,58 @@
-node  {
-    def Author = 'Alok Singh'
+//declarative pipeline code
 
-    stage('Clean WS') {
-        sh 'echo "Cleaning WorkSpace"'
-        cleanWs();
-
+pipeline{
+    agent any
+    options { 
+        quietPeriod(10) 
     }
-    stage('Declartive Checkout'){
-        checkout scm;
+    triggers {
+        pollSCM('* * * * *')
     }
-    stage('Compile') {
-        withMaven(jdk: 'jdk11', maven:'m2') {
-            sh 'mvn compile'
-        }
-    }
-     stage('Test') {
-        withMaven(jdk: 'jdk11', maven:'m2') {
-            sh 'mvn test'
-
-        }
+    tools {
+        maven 'm2'
+        jdk 'jdk11'
     }
 
-     stage('Package') {
-        withMaven(jdk: 'jdk11', maven:'m2') {
-            sh 'mvn package'
-        }
-    }
-
-    stage('Building Docker Image') {
-        steps {
-            sh 'docker image build -t aloksingh1980/myapp:1.0.0.'
-        }
-    }
-    stage('Docker Image Push'){
-        steps {
-            withCredentials([string(credentialsId: 'docker_hub_pass', variable: 'docker_hub_pass')]) {
-                    sh "docker login -u alok1980 -p ${docker_hub_pass}"
+    stages {
+        stage('Clean Ws') {
+            steps{
+                cleanWs()
             }
-            sh 'docker push aloksingh1980/myapp:1.0.0'
         }
-    }
-     stage('Deploy Container on dev_server') {
+        stage('Git CheckoutOut'){
+            steps{
+                checkout scm
+            }
+        }
+        stage ('Maven Package'){
+            steps{
+                sh 'mvn package'
+            }   
+        }
+        stage ('Build Docker Image '){
+            steps{
+                sh 'docker image build -t aloksingh1980/myapp:1.0.0 .'
+            }   
+        }
+        stage ('Docker Image Push'){
+            steps{
+                withCredentials([string(credentialsId: 'docker_hub_pass', variable: 'docker_hub_pass')]) {
+                    sh "docker login -u alok1980 -p ${docker_hub_pass}"
+                }
+                sh 'docker push bhavyapatel215/myapp:1.0.0'
+            }   
+        }
+        stage('Deploy Container on dev_server') {
             environment { 
                 dockerRUN = 'sh /home/ubuntu/dockerRUN.sh'
                 }
             steps {
                 sshagent(['dev_server']) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@3.142.249.149 ${dockerRUN}"
+
                 }
             }
-
+        }
     }
-
 }
+
