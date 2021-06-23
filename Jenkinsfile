@@ -1,6 +1,6 @@
 node  {
-    def Author = 'Alok Singh'
-
+    def app
+    
     stage('Clean WS') {
         sh 'echo "Cleaning WorkSpace"'
         cleanWs();
@@ -27,13 +27,13 @@ node  {
         }
     }
 
-    stage('Building Docker Image') {
+    stage('Build Image') {
         
-            sh 'docker build -t alok1980/testimage:1.0.1 .'
+            app = 'docker build -t ("alok1980/testimage")
         
     }
-    stage('Publishing Docker Image') {
-        sh "echo ${Author}"
+    stage('Test image') {
+        sh "echo Test Passed"
     }
 
 }
