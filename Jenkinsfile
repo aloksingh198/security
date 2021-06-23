@@ -27,7 +27,7 @@ node  {
         }
     }
 
-    stage('Build Image') {
+    stage('Build') {
         
             app = docker build -t ('alok1980/testimage')
         
