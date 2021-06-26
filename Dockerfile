@@ -1,7 +1,6 @@
-FROM ubuntu:20.04
-RUN apt-get update -y && \
-    apt-get install -y apache2
-COPY index.html /var/www/html/index.html
-ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
-EXPOSE 80
+FROM java:8
+WORKDIR /
+ADD ./target/spring-security-good-0.0.1-SNAPSHOT.jar spring-security-good-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+CMD java -jar spring-security-good-0.0.1-SNAPSHOT.jar
 
