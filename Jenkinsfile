@@ -39,11 +39,19 @@ pipeline{
         stage ('Docker Image Push'){
             steps{
                 sh 'docker push alok1980/testimage'
-                }
-                
-            
+                }                      
         }
-        
+        stage('Deploy Container on dev_server') {
+            environment { 
+                dockerRUN = 'sh /home/ubuntu/dockerRUN.sh'
+                }
+            steps {
+                sshagent(['dev_server']) {
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@18.117.234.185 ${dockerRUN}"
+                }
+            }
+        }
+
     }
 }
 
