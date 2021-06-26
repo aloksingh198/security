@@ -38,11 +38,10 @@ pipeline{
         }
         stage ('Docker Image Push'){
             steps{
-                withCredentials([string(credentialsId: 'docker_hub_pass', variable: 'docker_hub_pass')]) {
-                    sh "docker login -u alok1980 -p ${docker_hub_pass}"
-                }
                 sh 'docker push alok1980/testimage'
-            }   
+                }
+                
+            
         }
         
     }
