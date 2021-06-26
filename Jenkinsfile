@@ -33,12 +33,12 @@ pipeline{
         stage ('Build Docker Image '){
             steps{
                 sh 'docker login -u alok1980 -p "System@123"'
-                sh 'docker build -t alok1980/testimage .'
+                sh 'docker build -t alok1980/testimage:1.0.0'
             }   
         }
         stage ('Docker Image Push'){
             steps{
-                sh 'docker push alok1980/testimage'
+                sh 'docker push alok1980/testimage:1.0.0'
                 }                      
         }
         
